@@ -9,11 +9,13 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { AppProvider, UserProvider } from '@realm/react'
 import { REALM_APP_ID } from '@env'
 
+import { Routes } from './src/routes'
+import { RealmProvider } from './src/libs/realm'
+
 import { SignIn } from './src/screens/SignIn'
 import theme from './src/theme'
 import { Loading } from './src/components/Loading'
 import { StatusBar } from 'react-native'
-import { Routes } from './src/routes'
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -35,7 +37,9 @@ export default function App() {
             translucent
           />
           <UserProvider fallback={SignIn}>
-            <Routes />
+            <RealmProvider>
+              <Routes />
+            </RealmProvider>
           </UserProvider>
         </SafeAreaProvider>
       </ThemeProvider>
